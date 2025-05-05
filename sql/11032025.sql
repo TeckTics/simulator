@@ -1,0 +1,1 @@
+ALTER TABLE `personnel_formations` ADD `date_debut_formation` DATETIME NULL AFTER `personnel_user_id`;

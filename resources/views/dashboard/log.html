@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {{-- @php
+        $favicon = \App\Models\Setting::find(1)->favicon;
+    @endphp --}}
+    <meta charset="utf-8">
+    {{-- <link href="{{ $favicon ? url('images/upload/' . $favicon) : asset('/images/logo.png') }}" rel="icon"
+        type="image/png"> --}}
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@yield('title') | UrgenceSAMU</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    {{-- <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
+
+    <!-- Core plugin JavaScript-->
+    {{-- <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+</head>
+<style>
+    /* *{
+     font-family: cursive;
+    } */
+</style>
+
+<body>
+    <main class="overflow-hidden  relative bg-stone-100 h-full min-h-screen">
+        <div class="relative z-10 overflow-hidden">
+            <section class="grid grid-cols-5 bg-stone-100 overflow-hidden h-full  ">
+                <section class="w-full col-span-4 h-full rounded-md  relative ">
+                    <div class="absolute w-full h-full top-0 left-0 bg-cover opacity-20 bg-no-repeat grayscale z-0"
+                        style="background-image: url({{ asset('assets/icons/background-home.png') }})"></div>
+                    @include('dashboard.layout.header')
+                    <div class="flex text-sm py-2 px-2 relative justify-center z-10  bg-[#1a2539]  gap-2">
+                        {{-- <button name="shop-panel" class="show-modal">shop</button> --}}
+
+                        <x-nav-link link="boutique" label="boutique" image="icons/shop-cart-svgrepo-com.svg"
+                            :active="$activePage == 'boutique'"></x-nav-link>
+                        <x-nav-link link="alliances" label="Alliance SAMU" image="icons/group-svgrepo-com.svg"
+                            :active="$activePage == 'clans'"></x-nav-link>
+                        <x-nav-link link="elements" label="Equipements et éléments" image="icons/icons8-vehicle-50.png"
+                            :active="$activePage == 'element'"></x-nav-link>
+                        <x-nav-link link="classement" label="classement" image="icons/icons8-ranking-50.png"
+                            :active="$activePage == 'classement'"></x-nav-link>
+                        <x-nav-link link="statistique" label="Statistiques" image="icons/icons8-ranking-50 (1).png"
+                            :active="$activePage == 'statistique'"></x-nav-link>
+                        <x-nav-link link="classement-alliances" label="classement alliance"
+                            image="icons/icons8-ranking-50 (2).png" :active="$activePage == 'classement-alliances'"></x-nav-link>
+                        <x-nav-link link="profil" label="profil"
+                            image="icons/icons8-ranking-50 (2).png" :active="$activePage == 'profil'"></x-nav-link>
+                        <a href="{{ route('logoutUser') }}" class="hover:text-[#151b28]  hover:no-underline">
+                            <button
+                                class="w-full p-2 gap-2 flex items-center my-2  {{ $activePage == 'statistique' ? 'bg-gradient-to-tr border-2 via-red-500 to-red-500 from-red-700' : '' }} text-left text-sm transition-all rounded-sm cursor-pointer hover:from-red-700 hover:bg-gradient-to-tr hover:via-red-500 hover:to-red-500 ">
+                                <img src="{{ asset('/assets/images/poweroff.svg') }}" alt="icon">
+                                Deconnexion
+                            </button>
+                        </a>
+                    </div>
+                    <div class=" overflow-y-auto h-full relative z-20">
+                        @include('dashboard.layout.launcher-menu')
+                        <div>
+                            <x-shop-panel></x-shop-panel>
+                            @yield('content')
+                        </div>
+                    </div>
+                </section>
+                @include('dashboard.layout.layout-chat-panel')
+            </section>
+        </div>
+    </main>
+    @include('dashboard.layout.footer')
+</body>
+
+</html>
